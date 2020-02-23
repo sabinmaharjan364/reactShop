@@ -7,39 +7,42 @@ import Total from './components/Total/Total';
 
 
 class App extends Component {
+
   state = {
     isEditing:false,
     qty: 0,
     products: [
       {
-        id: 1,
-        title: 'android',
-        price: 12,
-        quantity: 0
-      },
-      {
-        id: 2,
-        title: 'iphone',
-        price: 23,
-        quantity: 0
-
-      },
-      {
-        id: 3,
-        title: 'nokia',
-        price: 11,
-        quantity: 0
-
+        id: null,
+        title: '',
+        price: 0,
+        quantity: 0,
+        // productItems:[],
       }
     ],
     totalPrice: 0,
+
     
   }
+  handleInputChange(event) {
+    event.preventDefault();
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+ 
+    this.setState({
+      [name]:value
+    })
+  }
   addProductHandler = (event) => {
+    let counter=0;
+
     event.preventDefault();
     var product = {
+      id:++counter,
       title: event.target.title.value,
-      price: parseInt(event.target.price.value)
+      price: parseInt(event.target.price.value),
+      quantity:0
     }
     this.setState({ products: this.state.products.concat(product) });;
 
@@ -65,26 +68,28 @@ class App extends Component {
     alert(title + "   " + price);
   }
 
-  editHandler=(id,title,price)=>{
-    const updateData = 
-      [{
-        id:id,
-        title:title,
-        price,price
-
-      }]
-    ;
-
-    console.log(updateData);
+  editHandler=(product)=>{
+   
     this.setState({isEditing:true});
-
+    this.setState({
+      title:product.title,
+      price:product.price
+    })
    
 
 
 
   }
-  updateProductHandler=(id)=>{
+  updateProductHandler=(event)=>{
     alert('í am here');
+    event.preventDefault();
+    const updatedTitle=event.target.title.value;
+    const updatedPrice=event.target.price.value;
+    this.setState({
+        title:updatedTitle,
+        price:updatedPrice
+    })
+
   }
   deleteHandler=(item)=>{
 
@@ -99,9 +104,13 @@ class App extends Component {
       <div className="App">
         <Form 
         addProduct={this.addProductHandler} 
-        
+        id={this.state.id}
+        title={this.state.title}
+        price={this.state.price}
+        isEditing={this.state.isEditing}
+        handleInputChange={()=>this.handleInputChange}
+
         />
-        i am returning list of product here
         <Lists 
         productsData={this.state.products} 
         buy={this.buyHandler} 
@@ -109,10 +118,21 @@ class App extends Component {
         qty={this.state.qty} 
         edit={this.editHandler}
         delete={this.deleteHandler}
-        isEditing={this.state.isEditing}
         updateProduct={this.updateProductHandler}
         />
-        <Total qty={this.state.qty} totalPrice={this.state.totalPrice} />
+        {
+          this.state.title!==""?
+            (<div>
+                <Total qty={this.state.qty} totalPrice={this.state.totalPrice} />
+
+              </div>
+            ):
+            (
+              <div>
+
+              </div>
+            )
+        }
       </div>
     );
   }
