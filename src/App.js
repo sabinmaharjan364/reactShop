@@ -17,7 +17,7 @@ class App extends Component {
         title: '',
         price: 0,
         quantity: 0,
-        // productItems:[],
+    
       }
     ],
     totalPrice: 0,
@@ -35,11 +35,11 @@ class App extends Component {
     })
   }
   addProductHandler = (event) => {
-    let counter=0;
+    
 
     event.preventDefault();
     var product = {
-      id:++counter,
+      id:this.state.products.length+1,
       title: event.target.title.value,
       price: parseInt(event.target.price.value),
       quantity:0
@@ -69,23 +69,25 @@ class App extends Component {
   }
 
   editHandler=(product)=>{
+    if(this.state.id!==null){
+      this.setState({isEditing:true});
+      this.setState({
+        title:product.title,
+        price:product.price
+      })
+    };
    
-    this.setState({isEditing:true});
-    this.setState({
-      title:product.title,
-      price:product.price
-    })
    
 
 
 
   }
   updateProductHandler=(event)=>{
-    alert('í am here');
     event.preventDefault();
     const updatedTitle=event.target.title.value;
     const updatedPrice=event.target.price.value;
     this.setState({
+      
         title:updatedTitle,
         price:updatedPrice
     })
@@ -108,7 +110,7 @@ class App extends Component {
         title={this.state.title}
         price={this.state.price}
         isEditing={this.state.isEditing}
-        handleInputChange={()=>this.handleInputChange}
+        handleInputChange={(event)=>this.handleInputChange}
 
         />
         <Lists 
