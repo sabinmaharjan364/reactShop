@@ -105,11 +105,6 @@ class App extends Component {
         price:product.price
       })
     };
-   
-   
-
-
-
   }
   updateProductHandler=(event)=>{
     event.preventDefault();
@@ -167,7 +162,7 @@ class App extends Component {
         productsData={this.state.products} 
         buy={this.buyHandler} 
         show={this.showHandler} 
-        qty={this.state.qty} 
+        quantity={this.state.quantity} 
         edit={this.editHandler}
         delete={this.deleteHandler}
         />

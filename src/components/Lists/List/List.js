@@ -19,7 +19,7 @@ return(
                                     {props.price}
                                 </td>
                                 <td>
-                                    {props.qty}
+                                    {props.quantity}
                                 </td>
                                 <td>
                                 <button onClick={()=>props.buy(props.price)}>Buy</button>

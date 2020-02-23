@@ -8,7 +8,7 @@ const lists = (props) => {
             id={product.id}
             title={product.title}
             price={product.price}
-            qty={product.quantity}
+            quantity={product.quantity}
             buy={() => props.buy(product.price, product.id)}
             show={() => props.show(product.title, product.price)} 
             edit= {() => props.edit(product)} 
