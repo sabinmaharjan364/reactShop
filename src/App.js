@@ -24,15 +24,15 @@ class App extends Component {
 
     
   }
-  handleInputChange(event) {
-    event.preventDefault();
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
- 
-    this.setState({
-      [name]:value
-    })
+  handleInputChange=(name,event)=> {
+
+      console.log(event);
+      this.setState({
+        products:[
+          {[name]:event.target.value}
+        ]
+      })
+  
   }
   addProductHandler = (event) => {
     
@@ -110,7 +110,7 @@ class App extends Component {
         title={this.state.title}
         price={this.state.price}
         isEditing={this.state.isEditing}
-        handleInputChange={(event)=>this.handleInputChange}
+        handleInputChange={this.handleInputChange}
 
         />
         <Lists 
