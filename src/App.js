@@ -69,6 +69,13 @@ class App extends Component {
   }
 
   editHandler=(product)=>{
+// another method using argument
+    // this.setState({
+    //   isEditing: true,
+    //   id: arguments[0],
+    //   title: arguments[1],
+    //   price:arguments[2]
+    // });
     if(this.state.id!==null){
       this.setState({isEditing:true});
       this.setState({
@@ -86,24 +93,21 @@ class App extends Component {
   updateProductHandler=(event)=>{
     event.preventDefault();
 
-    
-    const updatedID=event.target.products.id;
-    const updatedTitle=event.target.products.title;
-    const updatedPrice=event.target.products.price;
- 
-
-    const oldProducts = [...this.state.products];
-
-    oldProducts.find(
-      (element, index) => {
-        if (updatedID == element.id) {
-          
-        oldProducts[index].title = event.target.products.title;
-        oldProducts[index].price = event.target.products.price;
-          console.log(oldProducts);
-          this.setState({ products: oldProducts });
+    this.setState({
+      products: this.state.products.map(item => {
+        if (item.id === this.state.products.id) {
+          item['title'] = event.target.title.value;
+          item['price'] = event.target.price.value;
+          return item;
         }
-      });
+        console.log(item);
+        return item;
+      })
+    });
+
+    this.setState({
+      isEditing: false
+    });
 
   
 

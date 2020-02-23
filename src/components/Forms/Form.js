@@ -17,10 +17,11 @@ const form=(props)=>{
                
                                 
                     <input type="hidden" name="id" placeholder="Smartphones" value={props.id} onChange={(event)=>props.changed}/>
-                    <input type="text" name="title" placeholder="Smartphones" value={props.title} onChange={(event)=>props.changed}/>
+                    <input type="text" name="title" placeholder="Smartphones" defaultValue={props.title} onChange={(event)=>props.changed}/>
          
-                    <input type="number" name="price" placeholder="Price" value={props.price} onChange={(event)=>props.changed}/>
+                    <input type="number" name="price" placeholder="Price" defaultValue={props.price} onChange={(event)=>props.changed}/>
                     <button >Update Product</button>
+                    <button onClick={() => props.setEditing(false)}>Cancel</button>
                           
            
                 
