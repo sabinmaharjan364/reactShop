@@ -81,7 +81,7 @@ class App extends Component {
       });
     // I can get the id here but don't have idea to set theier own quqntity
     const qty = this.setState({ qty: this.state.qty + 1 });
-    const totalPrice = this.setState({ totalPrice: this.state.totalPrice + price });
+    const totalPrice = this.setState({ totalPrice: parseInt(this.state.totalPrice + price) });
 
   }
 
@@ -116,7 +116,7 @@ class App extends Component {
 
           alert('hi item');
           item['title'] = event.target.title.value;
-          item['price'] = event.target.price.value;
+          item['price'] = parseInt(event.target.price.value);
           item['quantity'] =0;
 
           console.log("inside loop"+item);
