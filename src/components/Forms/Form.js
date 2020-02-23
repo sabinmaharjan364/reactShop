@@ -16,7 +16,7 @@ const form=(props)=>{
                 
                
                                 
-                    <input type="hidden" name="id" placeholder="Smartphones" value={props.id} onChange={(event)=>props.changed}/>
+                    <input type="text" name="id" placeholder="Smartphones" defaultValue={props.id} onChange={(event)=>props.changed}/>
                     <input type="text" name="title" placeholder="Smartphones" defaultValue={props.title} onChange={(event)=>props.changed}/>
          
                     <input type="number" name="price" placeholder="Price" defaultValue={props.price} onChange={(event)=>props.changed}/>
@@ -35,9 +35,9 @@ const form=(props)=>{
             <form  className={classes.Form} onSubmit={props.addProduct}>
                 <input type="hidden" name="id" placeholder="id" value={props.id} />
                  
-                <input type="text" name="title" placeholder="Smartphones" value={props.title} onChange={(event)=>props.changed} />
+                <input type="text" name="title" placeholder="Smartphones"  />
         
-                <input type="number" name="price" placeholder="Price" value={props.price} onChange={(event)=>props.changed}/>
+                <input type="number" name="price" placeholder="Price" />
                 <button >Add Product</button>
     
         

@@ -8,14 +8,30 @@ import Total from './components/Total/Total';
 
 class App extends Component {
 
+  // state = {
+  //   isEditing:false,
+  //   qty: 0,
+  //   products: [
+  //     {
+  //       id: null,
+  //       title: '',
+  //       price: 0,
+  //       quantity: 0,
+    
+  //     }
+  //   ],
+  //   totalPrice: 0,
+
+    
+  // }
   state = {
     isEditing:false,
     qty: 0,
     products: [
       {
-        id: null,
-        title: '',
-        price: 0,
+        id: 1,
+        title: 'test',
+        price: 12,
         quantity: 0,
     
       }
@@ -44,7 +60,12 @@ class App extends Component {
       price: parseInt(event.target.price.value),
       quantity:0
     }
-    this.setState({ products: this.state.products.concat(product) });;
+    this.setState({
+      products: [...this.state.products, product
+      ]
+    });
+    // another method
+    // this.setState({ products: this.state.products.concat(product) });;
 
   }
   buyHandler = (price, id) => {
@@ -92,14 +113,23 @@ class App extends Component {
   }
   updateProductHandler=(event)=>{
     event.preventDefault();
-
+    console.log('í am in update');
     this.setState({
       products: this.state.products.map(item => {
-        if (item.id === this.state.products.id) {
+        if (parseInt(item.id) === parseInt(event.target.id.value)) {
+
+
+          alert('hi item');
           item['title'] = event.target.title.value;
           item['price'] = event.target.price.value;
+          item['quantity'] =0;
+
+          console.log("inside loop"+item);
+        console.log(item);
+
           return item;
         }
+        console.log("i am outside if condition");
         console.log(item);
         return item;
       })
@@ -129,7 +159,8 @@ class App extends Component {
         title={this.state.title}
         price={this.state.price}
         isEditing={this.state.isEditing}
-        changed={(event)=>this.handleInputChange}
+        changed={this.handleInputChange}
+        updateProduct={this.updateProductHandler}
 
         />
         <Lists 
@@ -139,7 +170,6 @@ class App extends Component {
         qty={this.state.qty} 
         edit={this.editHandler}
         delete={this.deleteHandler}
-        updateProduct={this.updateProductHandler}
         />
         {
           this.state.title!==""?
