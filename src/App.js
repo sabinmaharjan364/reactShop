@@ -24,12 +24,12 @@ class App extends Component {
 
     
   }
-  handleInputChange=(name,event)=> {
+  handleInputChange=(event)=> {
 
       console.log(event);
       this.setState({
         products:[
-          {[name]:event.target.value}
+          {name:event.target.value}
         ]
       })
   
@@ -72,6 +72,7 @@ class App extends Component {
     if(this.state.id!==null){
       this.setState({isEditing:true});
       this.setState({
+        id:product.id,
         title:product.title,
         price:product.price
       })
@@ -84,13 +85,27 @@ class App extends Component {
   }
   updateProductHandler=(event)=>{
     event.preventDefault();
-    const updatedTitle=event.target.title.value;
-    const updatedPrice=event.target.price.value;
-    this.setState({
-      
-        title:updatedTitle,
-        price:updatedPrice
-    })
+
+    
+    const updatedID=event.target.products.id;
+    const updatedTitle=event.target.products.title;
+    const updatedPrice=event.target.products.price;
+ 
+
+    const oldProducts = [...this.state.products];
+
+    oldProducts.find(
+      (element, index) => {
+        if (updatedID == element.id) {
+          
+        oldProducts[index].title = event.target.products.title;
+        oldProducts[index].price = event.target.products.price;
+          console.log(oldProducts);
+          this.setState({ products: oldProducts });
+        }
+      });
+
+  
 
   }
   deleteHandler=(item)=>{
@@ -110,7 +125,7 @@ class App extends Component {
         title={this.state.title}
         price={this.state.price}
         isEditing={this.state.isEditing}
-        handleInputChange={this.handleInputChange}
+        changed={(event)=>this.handleInputChange}
 
         />
         <Lists 
