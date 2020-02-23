@@ -16,9 +16,9 @@ const form=(props)=>{
                 
                
                                 
-                    <input type="text" name="title" placeholder="Smartphones" value={props.title} onChange={props.handleInputChange}/>
+                    <input type="text" name="title" placeholder="Smartphones" value={props.title} onChange={(event)=>props.handleInputChange}/>
          
-                    <input type="number" name="price" placeholder="Price" value={props.price} onChange={props.handleInputChange}/>
+                    <input type="number" name="price" placeholder="Price" value={props.price} onChange={(event)=>props.handleInputChange}/>
                     <button >Update Product</button>
                           
            
